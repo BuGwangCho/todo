@@ -1,7 +1,6 @@
 <template>
     <header>
-        <h1>LOGIN</h1>
-        <img src="./login2.png">
+        <img src="./login.png">
     </header>
 </template>
 <script>
@@ -10,9 +9,9 @@
     }
 </script>
 <style scoped>
-h1 {
-    color : #2F3B52;
-    font-weight: 900;
-    margin: 2.5rem 0 1.5rem;
+img {
+    height : 180px;
+    width: 180px;
+    margin-bottom: 1.5rem;
 }
 </style>

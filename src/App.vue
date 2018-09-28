@@ -1,32 +1,30 @@
 <template>
   <div id="app">
-      <TodoHeader></TodoHeader>
-      <TodoInput></TodoInput>
-      <TodoList></TodoList>
-      <TodoFooter></TodoFooter>
-   </div>
+    <LoginHeader></LoginHeader>
+    <LoginForm></LoginForm>
+  </div>
 </template>
 
 <script>
-import TodoHeader from './components/Todo/TodoHeader.vue'
-import TodoFooter from './components/Todo/TodoFooter.vue'
-import TodoInput from './components/Todo/TodoInput.vue'
-import TodoList from './components/Todo/TodoList.vue'
+import LoginHeader from './components/login/LoginHeader.vue'
+import LoginForm from './components/login/LoginForm.vue'
 
 export default {
   components : {
-    'TodoHeader' : TodoHeader,
-    'TodoFooter' : TodoFooter,
-    'TodoInput' : TodoInput,
-    'TodoList' : TodoList
+    'LoginHeader' : LoginHeader,
+    'LoginForm' : LoginForm
   }  
 }
 </script>
 
 <style>
+#app {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 body {
   text-align : center;
-  background-color : #f6f6f8;
 }
 input {
   border-style: groove;
