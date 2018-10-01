@@ -1,20 +1,10 @@
 <template>
   <div id="app">
-    <LoginHeader></LoginHeader>
-    <LoginForm></LoginForm>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LoginHeader from './components/login/LoginHeader.vue'
-import LoginForm from './components/login/LoginForm.vue'
-
-export default {
-  components : {
-    'LoginHeader' : LoginHeader,
-    'LoginForm' : LoginForm
-  }  
-}
 </script>
 
 <style>

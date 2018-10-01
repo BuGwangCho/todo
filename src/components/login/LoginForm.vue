@@ -1,15 +1,18 @@
 <template>
-    <form @submit="onSubmit">
-        <div class="inputBox"> 
-            <input type="text" placeholder=" 아이디" v-model="uid">
-        </div>
-        <div class="inputBox">
-            <input type="password" placeholder=" 비밀번호" v-model="password">
-        </div>
-        <span class="loginBox">
-           <input type="submit" aria-hidden="true" value="로그인" >
-        </span>
-    </form>
+    <div>
+        <img src="./login.png">
+        <form @submit="onSubmit">
+            <div class="inputBox"> 
+                <input type="text" placeholder=" 아이디" v-model="uid">
+            </div>
+            <div class="inputBox">
+                <input type="password" placeholder=" 비밀번호" v-model="password">
+            </div>
+            <span class="loginBox">
+            <input type="submit" aria-hidden="true" value="로그인" >
+            </span>
+        </form>
+    </div>
 </template>
 <script>
     export default {
@@ -21,8 +24,12 @@
         },
         methods : {
             onSubmit() {
-                alert('id : ' + this.uid);
-                alert('password : ' + this.password);
+                alert(this.uid);
+                if (this.uid === '1234' && this.password === '1234')  {
+                    redirect : to => "home";
+                } else {
+                    alert("id 및 password가 맞지 않습니다.")
+                }
             }
         }
     }
@@ -31,6 +38,11 @@
 div {
     margin : 0 auto;
     width : 230px;
+}
+img {
+    height : 180px;
+    width: 180px;
+    margin-bottom: 1.5rem;
 }
 input:focus {
     outline: none;
