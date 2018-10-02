@@ -5,6 +5,10 @@
 </template>
 
 <script>
+export default {
+  name: 'App',
+  
+}
 </script>
 
 <style>
@@ -15,6 +19,7 @@
 }
 body {
   text-align : center;
+  background-color:  #f6f6f8;
 }
 input {
   border-style: groove;

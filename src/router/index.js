@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LoginForm from '../components/login/LoginForm'
+import LoginForm from '../components/LoginForm'
 import Home from '../components/Home'
+import Test from '../components/Test'
 
 Vue.use(Router)
 
@@ -17,8 +18,14 @@ export default new Router({
             component: Home
         },
         {
+            path: '/test',
+            name: 'test-page',
+            component: Test
+        },
+        {
             path: '*',
             redirect: '/'
         }
+
     ]
 })

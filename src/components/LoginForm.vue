@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="./login.png">
+        <img src="../assets/login2-2.png">
         <form @submit="onSubmit">
             <div class="inputBox"> 
                 <input type="text" placeholder=" 아이디" v-model="uid">
@@ -26,7 +26,8 @@
             onSubmit() {
                 alert(this.uid);
                 if (this.uid === '1234' && this.password === '1234')  {
-                    redirect : to => "home";
+                    alert("id 및 password가 맞습니다.")
+                    location.href="#/home";
                 } else {
                     alert("id 및 password가 맞지 않습니다.")
                 }
@@ -48,7 +49,7 @@ input:focus {
     outline: none;
 }
 .inputBox {
-    background-color : #f6f6f8;
+    background-color : #ffffff;
     height : 45px;
     line-height: 45px;
     border-radius: 5px;
@@ -56,7 +57,7 @@ input:focus {
 }
 .inputBox input {
     border-style: none;
-    background-color : #f6f6f8;
+    background-color : #ffffff;
     font-size : 0.9rem;
     height : 30px;
     line-height: 30px;
