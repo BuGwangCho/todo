@@ -48,6 +48,7 @@ export default{
 	height:50px;
     background: rgb(255, 254, 254);
     line-height: 50px;
+    border-top:2px solid rgb(234, 234, 234)
 }
 .container {
     padding:20px;

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div id="header"><b>T E S T </b></div>
     <menu-tabs></menu-tabs>
     <b>Counting Test</b><br>
     <router-link to="home">go to home page</router-link>
@@ -58,3 +59,10 @@ export default{
   
 }
 </script>
+<style>
+#header {
+	height:50px;
+    background: rgb(255, 254, 254);
+    line-height: 50px;
+}
+</style>
