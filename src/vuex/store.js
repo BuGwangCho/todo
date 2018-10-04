@@ -7,9 +7,14 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-    counter: 0
+    counter: 1
 }
 
+// const mutations = {
+//     addCounter(state) {
+//         state.counter++
+//     }
+// }
 export default new Vuex.Store({
     state,
     mutations,

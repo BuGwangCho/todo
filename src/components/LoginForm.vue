@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="wrapper">
         <img src="../assets/login2-2.png">
         <form @submit="onSubmit">
             <div class="inputBox"> 
@@ -27,7 +27,9 @@
                 alert(this.uid);
                 if (this.uid === '1234' && this.password === '1234')  {
                     alert("id 및 password가 맞습니다.")
-                    location.href="#/home";
+                    this.$router.push({
+                        name:'Home'
+                    })
                 } else {
                     alert("id 및 password가 맞지 않습니다.")
                 }
@@ -36,6 +38,9 @@
     }
 </script>
 <style scoped>
+#wrapper {
+    margin-top : 60px;
+}
 div {
     margin : 0 auto;
     width : 230px;
