@@ -4,5 +4,6 @@ export default {
     getIsAuth: state => state.isAuth,
     counter: state => state.counter,
     doubleCounter: state => state.counter * 2,
-    tripleCounter: state => state.counter * 3
+    tripleCounter: state => state.counter * 3,
+
 }
