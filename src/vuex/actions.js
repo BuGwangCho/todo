@@ -32,8 +32,20 @@ export default {
         }
         return store.getters.getIsAuth
     },
+    counter: context => context.commit(''),
     addCounterOne: context => context.commit('addCounterOne'),
     asyncIncrement: (context, payload) => setTimeout(function() {
         context.commit('addCounter', payload.by)
-    }, payload.duration)
+    }, payload.duration),
+    getLoginLogData: context => context.commit('getLoginLogData'),
+    getPageLogData: context => context.commit('getPageLogData'),
+    getScrapLogData: context => context.commit('getScrapLogData'),
+    LOGIN({ commit }, data) {
+        return commit('LOGIN', data)
+    },
+    LOGOUT({ commit }) {
+        commit('LOGOUT')
+    }
+
+
 }
