@@ -4,5 +4,7 @@
     </div>
 </template>
 <script>
+    //SELECT * FROM log_login_2018 WHERE seq = 1 or seq = 2;
+
     
 </script>

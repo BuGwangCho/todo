@@ -40,7 +40,7 @@
                     </table>
                 </div>
             <strong v-else>
-                Click on log button you wanna see
+                Click on log button want to see
             </strong>
         </div>
         

@@ -2,7 +2,7 @@ import * as types from './mutation_types'
 import api from '../service'
 
 let setUID = ({ commit }, data) => {
-    commit(UID, data)
+    commit('UID', data)
 }
 
 let setErrorState = ({ commit }, data) => {
@@ -10,7 +10,7 @@ let setErrorState = ({ commit }, data) => {
 }
 
 let setIsAuth = ({ commit }, data) => {
-    commit(IS_AUTH, data)
+    commit('IS_AUTH', data)
 }
 
 export default {
@@ -32,7 +32,6 @@ export default {
         }
         return store.getters.getIsAuth
     },
-    counter: context => context.commit(''),
     addCounterOne: context => context.commit('addCounterOne'),
     asyncIncrement: (context, payload) => setTimeout(function() {
         context.commit('addCounter', payload.by)
@@ -40,12 +39,17 @@ export default {
     getLoginLogData: context => context.commit('getLoginLogData'),
     getPageLogData: context => context.commit('getPageLogData'),
     getScrapLogData: context => context.commit('getScrapLogData'),
-    LOGIN({ commit }, data) {
-        return commit('LOGIN', data)
+    login2(store, { uid, password }) {
+        let loginResponse = '';
+        if (uid === '1234' && password === '1234') {
+            loginResponse = 'true'
+        }
+        if (loginResponse) {
+            setIsAuth(store, loginResponse);
+            setUID(store, uid);
+        }
     },
     LOGOUT({ commit }) {
         commit('LOGOUT')
     }
-
-
 }

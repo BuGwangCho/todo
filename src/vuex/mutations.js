@@ -1,4 +1,5 @@
 import * as types from './mutation_types'
+//import { access } from 'fs';
 
 export default {
     [types.UID](state, uid) {
@@ -16,9 +17,14 @@ export default {
     ['addCounter'](state, payload) {
         state.counter = state.counter + payload
     },
-
     ['initialize'](state) {
         state.counter = 0
-    }
+    },
+    // ['login'](state, accessToken) {
+    //     state.accessToken = null
+    // },
+    // ['logout'](state) {
+    //     state.accessToken = null
+    // },
 
 }

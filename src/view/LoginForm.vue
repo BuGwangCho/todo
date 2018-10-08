@@ -1,12 +1,12 @@
 <template>
     <div id="wrapper">
         <img src="../assets/login2-2.png">
-        <form @submit="onSubmit">
+        <form @submit="onSubmit()">
             <div class="inputBox"> 
-                <input type="text" placeholder=" 아이디" v-model="uid">
+                <input type="text" placeholder=" 아이디" name="uid" v-model="uid">
             </div>
             <div class="inputBox">
-                <input type="password" placeholder=" 비밀번호" v-model="password">
+                <input type="password" placeholder=" 비밀번호" name="password" v-model="password">
             </div>
             <span class="loginBox">
             <input type="submit" aria-hidden="true" value="로그인" >
@@ -24,15 +24,25 @@
         },
         methods : {
             onSubmit() {
-                alert(this.uid);
-                if (this.uid === '1234' && this.password === '1234')  {
-                    alert("id 및 password가 맞습니다.")
-                    this.$router.push({
-                        name:'Home'
-                    })
+                alert("로그인 인증진행중");
+                this.$store.dispatch('login2' , {uid: this.uid, password:this.password}).then(data => data)
+                let isAuth = this.$store.getters.getIsAuth
+                console.log("id : " + this.$store.getters.getUid)
+                console.log("isAuth : " + this.$store.getters.getIsAuth)
+                if (isAuth === 'true') {
+                    alert("성공");
+                    this.goToPages();
                 } else {
-                    alert("id 및 password가 맞지 않습니다.")
+                    alert("실패")
+                    this.uid = '';
+                    this.password = '';
                 }
+               
+            },
+            goToPages() {
+                this.$router.push({
+                    name: 'Home'
+                })
             }
         }
     }

@@ -7,6 +7,9 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
+    uid: '',
+    isAuth: 'false',
+    errorState: '',
     counter: 1,
     axios: require('axios')
 }

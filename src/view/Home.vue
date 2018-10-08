@@ -20,11 +20,13 @@
 import tabLogs from '../components/tab-logs'
 import tabStorage from '../components/tab-storage'
 import tabTest from '../components/tab-test'
+import tabEtc from '../components/tab-etc'
 export default {
+    name: 'home',
     data () {
         return {
             currentTab: 'Logs',
-            tabs: ['Logs', 'Storage', 'Test','Logout']
+            tabs: ['Logs', 'Storage', 'Test', 'Etc','Logout']
         }
     },
     computed:{
@@ -35,7 +37,8 @@ export default {
     components: {
         'tab-logs' : tabLogs,
         'tab-storage' : tabStorage,
-        'tab-test' : tabTest
+        'tab-test' : tabTest,
+        'tab-etc' : tabEtc
     },
     methods: {
         logout(currentTab){
@@ -51,7 +54,7 @@ export default {
 <style>
 .tab-button {
   padding: 6px 10px;
-  width: 25%;
+  width: 20%;
   height: 50px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
