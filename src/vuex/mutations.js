@@ -3,6 +3,7 @@ import * as types from './mutation_types'
 
 export default {
     [types.UID](state, uid) {
+        console.log('mutation-UID 실행')
         state.uid = uid
     },
     [types.ERROR_STATE](state, errorState) {
@@ -15,6 +16,7 @@ export default {
         state.counter++;
     },
     ['addCounter'](state, payload) {
+        console.log('mutation addCounter 실행');
         state.counter = state.counter + payload
     },
     ['initialize'](state) {
@@ -26,5 +28,8 @@ export default {
     // ['logout'](state) {
     //     state.accessToken = null
     // },
-
+    ['setStoredLogs'](state, payload) {
+        console.log('mutation측' + payload);
+        state.storedLogs = payload
+    }
 }

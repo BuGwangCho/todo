@@ -21,7 +21,7 @@
     <hr>
     <h2>actions</h2>
     <br>
-
+    <button @click="addCounter(1)">+1</button>
     <button @click="addCounterOne">+1</button>
     <button @click="asyncIncrement({by: 70, duration: 200 })">asyncIncrement</button>
 
@@ -46,10 +46,13 @@ export default{
     ...mapActions([
       'addCounterOne',
       'asyncIncrement'
-    ])
-    // addCounter() {
-    //   this.$store.dispatch('addCounter')
-    // },
+    ]),
+    //mutation 호출
+    //   addCounter() {
+    //   // this.$store.state.counter++;
+    //   this.$store.commit('addCounter');
+    // }
+    //action 호출
     // asyncIncrement(payloads){
     //   this.$store.dispatch('asyncIncrement',payloads)
     // }

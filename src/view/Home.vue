@@ -1,10 +1,12 @@
 <template>
     <div id="dynamic-component-demo">
         <div id="header"><b>{{currentTab}} </b></div>
+        <div id="body">
         <keep-alive>
             <component v-bind:is="currentTabComponent"
             class="tab"></component>
         </keep-alive>
+        </div>
         <div id="footer">
             <button
                 v-for="tab in tabs"
@@ -21,6 +23,7 @@ import tabLogs from '../components/tab-logs'
 import tabStorage from '../components/tab-storage'
 import tabTest from '../components/tab-test'
 import tabEtc from '../components/tab-etc'
+import tabLogout from '../components/tab-logout'
 export default {
     name: 'home',
     data () {
@@ -38,11 +41,12 @@ export default {
         'tab-logs' : tabLogs,
         'tab-storage' : tabStorage,
         'tab-test' : tabTest,
-        'tab-etc' : tabEtc
+        'tab-etc' : tabEtc,
+        'tab-logout' : tabLogout
     },
     methods: {
         logout(currentTab){
-            if(currentTab == 'Logout') {
+            if(currentTab === 'Logout') {
                 this.$router.push({
                     name: 'Login'
                 })
@@ -70,7 +74,6 @@ export default {
   background: #e0e0e0;
 }
 .tab {
-  border-top: 1px solid #ccc;
 }
 .tab-button:last-child {
     border-right: none;
@@ -80,9 +83,13 @@ export default {
  min-height: 100%;
 }
 #header {
+position: fixed;
+top:0;
+width: 100%;
 height:50px;
 background: rgb(255, 254, 254);
 line-height: 50px;
+border-bottom: 1px solid #ccc;
 }
 #footer {
  position: fixed;
@@ -91,6 +98,15 @@ line-height: 50px;
  height: 50px;   
  line-height: 40px;
  background:rgb(255, 254, 254);
+}
+#body {
+    margin-bottom:50px;
+    margin-top:50px;
+}
+.logs-tab {
+    position:fixed;
+    top:50px;
+    width:100%;
 }
 </style>
 

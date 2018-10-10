@@ -24,8 +24,10 @@
         },
         methods : {
             onSubmit() {
+                this.$store.commit('addCounter',10);
                 alert("로그인 인증진행중");
                 this.$store.dispatch('login2' , {uid: this.uid, password:this.password}).then(data => data)
+
                 let isAuth = this.$store.getters.getIsAuth
                 console.log("id : " + this.$store.getters.getUid)
                 console.log("isAuth : " + this.$store.getters.getIsAuth)

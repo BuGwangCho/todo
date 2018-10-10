@@ -41,3 +41,18 @@ export default new Router({
     ],
     mode: 'history',
 })
+
+
+var router = new Router({
+
+})
+router.beforeEach((to, from, next) => {
+    if (store.state.isAuth === 'true') {
+        console.log('전역 네비 가드');
+        next();
+    } else {
+        console.log(store.state.uid);
+
+    }
+
+})

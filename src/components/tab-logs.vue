@@ -3,42 +3,52 @@
         <div class="logs-tab">
             <ul class="logs-sidebar">
                 <button 
-                v-for=" table in tables"
+                v-for=" table in getTable"
                 v-bind:key="table"
-                v-bind:class="['kind-button',{ selected: obj[table] === selectedTable}]"
-                v-on:click="selectedTable = obj[table]"
+                v-bind:class="['kind-button',{ selected: table === selectedTable}]"
+                v-on:click="selectedTable = table,  selectedYear=2018"
                 >
                 {{table}}
                 </button>
+                
             </ul>
         </div>
         <div class="selected-log-container">
-                <div 
-                v-if="selectedTable"
-                class="selected-log"
-                >
-                    <table>
-                        <tr class="cols">
-                            <th></th>
-                            <th  
-                                v-if="selectedTable == obj['LOGIN'] "
-                                v-for="col in cols['LOGIN']" 
-                                :key="col"> {{col}} </th>
-                            <th  
-                                v-if="selectedTable == obj['SCRAP']"
-                                v-for="col in cols['SCRAP']" 
-                                :key="col"> {{col}} </th>
-                            <th 
-                                v-if="selectedTable == obj['PAGE']"
-                                v-for="col in cols['PAGE']" 
-                                :key="col"> {{col}} </th>
-                        </tr>
-                        <tr class="list" v-for="list  in selectedTable" :key="list.seq">
-                            <td></td>
-                            <td class="one" v-for="value in list" :key="value"> {{value}} </td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="store-button"  v-if="selectedSeq.length>0" > 
+                <span class="selectSeq-store" @click="goStorage(selectedTable,selectedSeq,selectedYear)"><b>{{selectedSeq.length}} to storage</b></span> 
+                <span class="selectSeq-cancle" @click="selectedAllCancle()"><b>cancle</b> </span>
+            </div>
+            <div 
+            v-if="selectedTable"
+            class="selected-log"
+            >
+                <table>
+                    
+                    <tr class="cols">
+                        <th></th>
+                        <th
+                            v-for="col in getCols[selectedTable]" 
+                            :key="col"> {{col}} </th>
+                        <!--
+                        <th 
+                            v-if="selectedTable == obj['PAGE']"
+                            v-for="col in cols['PAGE']" 
+                            :key="col"> {{col}} </th> 
+                        <th v-if="selectedSeq.length>0"></th> -->
+                    </tr>
+                    <tr class="list" v-for="list  in obj[selectedTable]" :key="list.seq"
+                        @click="selectedRow = list.seq, 
+                                selectedSeq.includes(list.seq)? selectedSeq.splice(selectedSeq.indexOf(list.seq),1) : selectedSeq.push(list.seq) ,
+                                click_tr(),store()" 
+                        :class="['cols',{highlight:selectedSeq.includes(list.seq)}]">
+                        <td></td>
+                        <td class="one" v-for="value in list" :key="value" :id="list.seq"> {{value}} </td>
+                        <!-- <td v-if="selectedSeq.length>0 && selectedSeq.includes(list.seq)" @click="click_store">store</td> -->
+
+                    </tr>
+                    
+                </table>
+            </div>
             <strong v-else>
                 Click on log button want to see
             </strong>
@@ -49,12 +59,8 @@
 
 
 <script>
-let cols = {
-    'LOGIN' : ['seq', 'id','mac', 'device','version', 'sip', 'uip', 'login', 'logout'],
-    'PAGE' : ['seq', 'id', 'ip', 'version', 'pageSerial', 'regDate'],
-    'SCRAP' : ['seq', 'id', 'ip', 'version', 'scrapSerial', 'regDate']
-}
-let table = ['LOGIN', 'PAGE', 'SCRAP'];
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+
 let object = { 
         'LOGIN': [],
         'PAGE' : [],
@@ -78,15 +84,56 @@ function getData(table) {
 export default {
     data () {
         return {
-            tables : table,
-            selectedTable: object['login'],
+            tables : '',
+            selectedTable: '',
             obj : object,
-            cols : cols
+            // cols : cols,
+            // colsNum : colsNum,
+            selectedYear: '',
+            selectedTableName : '',
+            selectedRow : '',
+            selectedSeq : [ ]
+
+        }
+    },
+    computed: {
+        
+        ...mapGetters([
+        'getTable',
+        'getCols',
+        'getColsNum',
+        'getObject'
+        ])
+    },
+    methods: {
+        click_tr() {
+            //$(".highlight").prepend("<td class='store'>보관</td>");
+            console.log(this.selectedSeq);
+        },
+        store() {
+            if(this.selectedSeq.length > 0) {
+                console.log('선택된 행이 있음');
+
+            }
+        },
+        click_store() {
+            alert('보관되어야할 seq :' + this.selectedSeq);
+            console.log('비우기전 :' + this.selectedSeq);
+        },
+        selectedAllCancle() {
+            this.selectedSeq = [ ];
+        },
+        goStorage(table,seq,year){
+            console.log('보관함으로 이동  : ' + table + ', ' + seq + ', ' + year + ', ');
+            this.selectedAllCancle();
+            let table_name = table.toLowerCase();
+            this.$store.dispatch('goStorage', {table_name, seq, year});
+
         }
     }
 }
 </script>
-<style >
+<style>
 .kind-button {
   padding: 6px 10px;
   width: 33.333%;
@@ -115,9 +162,10 @@ export default {
 }
 .logs-sidebar {
   width: 100%;
-  margin: 0;
+  margin: 1px 0 0 0;
   padding: 0;
   list-style-type: none;
+
 }
 .logs-sidebar ul{
   display: inline-block;
@@ -134,27 +182,54 @@ export default {
 .logs-sidebar button.selected {
   background: #eeeded;
 }
-table {
+.selected-log-container {
+    margin-top: 95px;
+}
+.selected-log-container table {
     width: 100%;
     align-content: center;
 }
-table tr .cols {
+.selected-log-container table tr {
+    cursor: pointer;
 }
-table th{
+.selected-log-container table th{
     padding: 5px;
     text-align: center;
     border-bottom: 1px solid #ccc;
-    
     background:#fffdfd;
     
 }
-table th:last-child{
+.selected-log-container table th:last-child{
     border-right: none;
 }
-.one {
+.selected-log-container table tr .one {
     padding: 3px 0;
     border-bottom: #e0e0e0;
+    
+}
+.selected-log-container .highlight{
+    background-color:#e0dfdf;
+}
+.selected-log-container .store-button {
+position: fixed;
+top:51px;
+width: 100%;
+height:45px;
+background: lightblue;
+line-height: 45px;
+cursor: pointer;
 }
 
-
+.selected-log-container .selectSeq-store {
+    margin : 0;
+    height: 45px;
+    float:left;
+    width: 70%;
+    padding-left:15%
+}
+.selected-log-container .selectSeq-cancle {
+    margin : 0;
+    float: right;
+    width: 15%;
+}
 </style>
